@@ -1,0 +1,271 @@
+; TODO: base the amount of path clearing each ant does inversley to the number of ants 
+; TODO: base the certainty factor on a ratio instead of a fixed number and make it a
+; controllable parameter in the user interface.
+extensions [table read-origins]
+
+globals [
+  growth-rate-change
+  destinations
+  ant-life-span
+  first-ant-id
+  file-origins-coordinates
+  flowMap
+  average-ant-lifetime
+  ants-died
+]
+
+patches-own [
+  roughness
+  growth-rate
+  stay-away
+]
+
+; a passenger has a destination it wishes to get to.
+
+breed [passengers passenger]
+
+passengers-own [
+  destination
+  on-a-bus
+  get-off-station ; when on a bus get off at this station
+  trip-time; the number of ticks from the beginning of phase-3 until the passenger gets to their destination 
+]
+
+breed [ants ant]
+
+ants-own [
+  destination
+  age
+  begin-ticks
+  end-ticks
+]
+
+to reset-phase-1
+  clear-all
+  set phase 1
+  setup-patches
+  set file-origins-coordinates read-origins:read-regions-coordinates nodes-file-path num-of-origins
+  set average-ant-lifetime 0
+  set ants-died 0
+  reset-ticks
+end
+
+to setup-phase-1
+  ask buses [die]
+  setup-passengers-from-file ;setup-passengers
+  setup-ants
+  reset-ticks
+end
+
+to setup-passengers-from-file
+  set-default-shape passengers "person business"
+  set flowMap read-origins:read-flow-mat trips-path num-of-origins;load-flow-map-from-file
+  
+  let i 0
+  let j 0
+  repeat length(flowMap) [
+    set j 0
+    repeat length(flowMap) + 1 [
+      
+      if j < length(item i flowMap) [
+      let flow item j item i flowMap
+      let passengersToAdd flow / 20
+      set number-of-passengers number-of-passengers + passengersToAdd
+      
+      create-passengers passengersToAdd 
+      [
+        let origin-coordinate item i file-origins-coordinates
+        let xO item 0 origin-coordinate 
+        let yO -1 * (item 1 origin-coordinate) 
+        
+        setxy xO yO
+        
+        let dest-coordinate item j file-origins-coordinates
+        let xD item 0 dest-coordinate 
+        let yD -1 * (item 1 dest-coordinate )
+        set destination patch (xD) (yD)
+          
+        set on-a-bus nobody
+        set trip-time 0
+        ]
+      ]
+      set j j + 1
+    ]
+    set i i + 1
+  ]
+end
+
+to setup-passengers
+  set-default-shape passengers "person business"
+  create-passengers number-of-passengers [
+    let origin-patch runresult origin-generator
+;    setxy ([pxcor] of origin-patch + -0.3 + random-float 0.6) ([pycor] of origin-patch + -0.3 + random-float 0.6)
+    setxy ([pxcor] of origin-patch) ([pycor] of origin-patch)
+    set destination runresult destination-generator
+    set on-a-bus nobody
+    set trip-time 0
+  ]
+end
+
+to-report random-location
+  report patch ( 5 * int (random world-width / 5) - (world-width - 1) / 2) (5 * int (random world-height / 5) - (world-height - 1) / 2)
+end
+
+to-report city-center-location
+  report patch 0 0
+end
+
+to-report four-corners-location
+  report item random 4 (list patch min-pxcor min-pycor patch min-pxcor max-pycor patch max-pxcor min-pxcor patch max-pxcor max-pxcor)
+end
+
+to-report east-location
+  report patch min-pxcor 0
+end
+
+to-report west-location
+  report patch max-pxcor 0
+end
+
+to-report south-location
+  ;report patch 0 min-pycor
+  report patch 1 -47
+end
+
+to-report north-location
+  ;report patch 0 max-pycor
+  report patch 10 40
+end
+
+to setup-patches
+  set growth-rate-change -0.001
+  
+  import-pcolors map-path
+  
+  ask patches [
+
+    set roughness -1 / growth-rate-change
+    set growth-rate 0
+    set stay-away 0
+
+   ; ifelse pxcor mod 5 != 0 and pycor mod 5 != 0
+    ;[ set pcolor gray ]
+    ;[ refresh-color ]
+
+  ]
+end
+
+to setup-patches-in-maze
+  set growth-rate-change -0.001
+
+  ask patches [
+
+    set roughness -1 / growth-rate-change
+    set growth-rate 0
+    set stay-away 0
+
+    ifelse pcolor > 3
+    [ set pcolor gray ]
+    [ refresh-color ]
+
+  ]
+end
+
+to setup-ants
+  
+  set ant-life-span 2000
+
+  ask passengers [
+    hatch-ants 1 [
+      set shape "ant"
+      set color red
+      setxy pxcor pycor
+      set destination [destination] of myself
+      set age 0
+      set begin-ticks ticks
+      
+      ask destination [
+        set pcolor blue
+      ]
+    ]
+  ]
+
+  set first-ant-id min [who] of ants
+end
+
+to go-phase-1
+  grow-grass
+  move-ants
+;  ask ants [
+;    ifelse age >= ant-life-span
+;    [die]
+;    [set age age + 1] ]
+  tick
+end
+
+to grow-grass
+  ask patches with [ pcolor != gray ] [
+    set roughness roughness + growth-rate
+    set growth-rate growth-rate * (1 + growth-rate-change)
+    set stay-away stay-away * 0.99
+    refresh-color
+  ]
+
+  ; but not on destinations
+
+  ;ask ants [
+  ;  ask destination [ refresh-color ]
+  ;]
+end
+
+to move-ants
+  ask ants [
+    
+    if who - first-ant-id > ticks * 10
+    [stop]
+    
+    ifelse patch-here = destination
+    [
+      set end-ticks ticks
+      let total-ticks end-ticks - begin-ticks
+      let average-life average-ant-lifetime * ants-died
+      set ants-died ants-died + 1
+      set average-ant-lifetime (average-life + total-ticks) / ants-died
+      die
+      ;set average-ant-lifetime average-life
+    ]
+    [next-ant-patch]
+  ]
+end
+
+to refresh-color
+  let s scale (roughness) (color-sensitivity / (-100.0 * growth-rate-change))  (-1 / growth-rate-change) 0 100
+  set pcolor approximate-hsb 124 s s
+end
+
+to-report scale [value start finish beginp endp]
+  report beginp + (endp - beginp) * (value - start) / (finish - start)
+end
+
+
+to next-ant-patch
+  let best-neighbor max-one-of (neighbors with [ pcolor != gray ]) [rank myself]
+  if best-neighbor != nobody and [rank myself] of best-neighbor > [rank myself] of patch-here
+;  if best-neighbor != nobody and [rank myself] of best-neighbor > 0.000001 + [rank myself] of patch-here
+  [
+    set roughness roughness * (1 - 1 / count passengers)
+    set growth-rate roughness * growth-rate-change + 1
+    face best-neighbor
+    fd 1
+  ]
+  set stay-away stay-away + (10 / count passengers) 
+end
+
+to-report rank [aTurtle]
+  report 1 / ((distance [destination] of aTurtle) * roughness * (1 + stay-away) + 0.000001)
+end
+
+to-report average [numbers]
+  report sum numbers / length numbers
+end
+

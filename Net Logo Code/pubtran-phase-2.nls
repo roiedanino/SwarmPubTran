@@ -1,0 +1,120 @@
+
+; A bee has a destination and an itinerary that includes a set of
+; stations and for each station the amount of passengers wishing
+; to arrive to this station.
+;
+; The bee initializes its itinerary from the destinations of the
+; passengers at its birth patch. It then picks a destination and
+; navigates to it by moving towards patches that bring it closer
+; to its destination. When the bee arrives to its destination it stops.
+; Whenever the bee passes through one of the stations in its itienrary
+; it clears the number of passengers wishing to arrive to this station
+; from its itinerary. Thus each bee describes a route that beings
+; at the bee's birth patch, ends at its destination and consists of the
+; stations in its itinerary ordered according to the time it reached them.
+; When all the bees stop we select the route of the bee whose remaining
+; passenger count was the lowest.
+
+breed [bees bee]
+
+bees-own [
+  itinerary
+  destination
+  route
+  drop-count ; number of passengers this bee may drop along its way
+]
+
+to setup-phase-2
+  ask ants [die]
+  ask buses [die]
+  setup-bees
+end
+
+to setup-bees
+  set-default-shape bees "bee"
+  ask bees [die]
+  ask patches [
+    foreach remove-duplicates [destination] of passengers-here
+    [ dest ->
+      sprout-bees 1;5
+      [ set color yellow
+        setxy pxcor pycor
+        set destination dest
+        set route (list patch-here)
+        set drop-count 0
+        build-itinerary
+      ]
+  ] ]
+end
+
+to build-itinerary
+  set itinerary []
+  foreach sort passengers-here [ p -> set itinerary inc-at-key [destination] of p itinerary ]
+end
+
+to-report inc-at-key [ key key-number-list ]
+  ifelse empty? key-number-list
+  [report (list (list key 1)) ]
+  [ ifelse first first key-number-list = key
+    [ report fput (list key ((first but-first first key-number-list) + 1)) (but-first key-number-list) ]
+    [ report fput (first key-number-list) (inc-at-key key (but-first key-number-list)) ] ]
+end
+
+to-report drop-key [ key key-number-list ]
+  ifelse empty? key-number-list
+  [report key-number-list]
+  [ ifelse first first key-number-list = key
+    [report but-first key-number-list ]
+    [report fput (first key-number-list) (drop-key key (but-first key-number-list)) ] ]
+end
+
+to-report value-at-key [key key-number-list ]
+  ifelse empty? key-number-list
+  [ report nobody ]
+  [ifelse first first key-number-list = key
+    [report first but-first first key-number-list ]
+    [report value-at-key key but-first key-number-list ] ]
+end
+
+; GO PHASE 2
+
+to go-phase-2
+  ask bees [move-bee]
+  tick
+end
+
+to move-bee
+
+  let n value-at-key patch-here itinerary
+  
+  if n != nobody 
+  [ set itinerary drop-key patch-here itinerary
+    set drop-count drop-count + n ]
+  
+  ifelse patch-here = destination
+  [stop]
+  [let current-patch patch-here
+    next-bee-patch
+    if patch-here != current-patch
+    [set route lput patch-here route]
+  ]
+
+end
+
+to next-bee-patch
+  let best-neighbor max-one-of (neighbors with [ pcolor != gray ]) [rank myself]
+  ifelse best-neighbor != nobody and [rank myself] of best-neighbor > [rank myself] of patch-here
+  [
+    face best-neighbor
+    fd 1
+  ]
+  [ set stay-away stay-away + 1 ]
+end
+
+; returns true if lst1 is a sublist of lst2
+
+to-report is-sublist [ lst1 lst2 ]
+  ifelse length lst1 > length lst2
+  [report false]
+  [report lst1 = sublist lst2 0 length lst1 or is-sublist lst1 but-first lst2 ]
+end

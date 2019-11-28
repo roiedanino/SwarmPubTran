@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="NetLogoExtensions:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/NetLogoExtensions_jar</output-path>
+    <root id="archive" name="NetLogoExtensions.jar">
+      <element id="extracted-dir" path="$PROJECT_DIR$/../netlogo-6.1.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

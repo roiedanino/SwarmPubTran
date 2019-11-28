@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Manager: ReadOriginsExtension
+Extension-Name: read-origins
+NetLogo-Extension-API-Version: 6.1
+
