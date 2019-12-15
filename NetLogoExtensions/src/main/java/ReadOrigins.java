@@ -2,7 +2,6 @@ import com.opencsv.CSVReader;
 import org.nlogo.api.*;
 import org.nlogo.core.Syntax;
 import org.nlogo.core.SyntaxJ;
-
 import java.io.FileReader;
 import java.util.Iterator;
 
@@ -48,12 +47,15 @@ public class ReadOrigins implements Reporter {
             while (iterator.hasNext() && numOfOrigins <= maxOrigins) {
                 for (String originStr : iterator.next()){
                     String[] originPair = originStr.split(":");
+
                     if(originPair.length >= 2 && !originPair[0].isEmpty()) {
-                        //Integer integerVal = Integer.parseInt(originPair[0].trim());
+                        int destination = Integer.parseInt(originPair[0].trim());
                         double doubleVal = Double.parseDouble(originPair[1].trim());
-                        //LogoListBuilder pair = new LogoListBuilder();
-                        //pair.add(integerVal.doubleValue());
-                        //pair.add(doubleVal);
+
+                        if(destination - 1 == numOfOrigins){
+                            originPairBuilder.add(0.0);
+                        }
+
                         originPairBuilder.add(doubleVal);//pair.toLogoList()
                     }
 
@@ -63,16 +65,18 @@ public class ReadOrigins implements Reporter {
                             originsListBuilder.add(originPairBuilder.toLogoList());
                         }
                         originPairBuilder = new LogoListBuilder();
-                        //originPairBuilder.add(originPair[0]);
                         System.out.println(originPair[0]);
                     }
                 }
             }
+            originPairBuilder.add(0.0);
+            originsListBuilder.add(originPairBuilder.toLogoList());
 
            // rowsEntries.forEach(strArr -> handleRow(strArr, originsListBuilder));
 
         } catch (Exception e) {
             e.printStackTrace();
+
         }
 
         return originsListBuilder.toLogoList();

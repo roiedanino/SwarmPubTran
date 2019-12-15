@@ -5,6 +5,7 @@ import org.nlogo.core.SyntaxJ;
 import scala.Int;
 
 import java.io.FileReader;
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class ReadRegionsCoordinates  implements Reporter {
@@ -22,18 +23,19 @@ public class ReadRegionsCoordinates  implements Reporter {
         LogoListBuilder coordinatesListBuilder = new LogoListBuilder();
 
         try {
-            reader = new CSVReader(new FileReader(path), '\t');
+            reader = new CSVReader(new FileReader(path), ';');
             reader.skip(HEADER_LINES);
 
             Iterator<String[]> linesIterator = reader.iterator();
 
             for (int i = 0; linesIterator.hasNext() && i < max ; i++) {
                 String[] row = linesIterator.next();
+                row = row[0].split("[\t ]+");
                 LogoListBuilder coordinateBuilder = new LogoListBuilder();
-
                 coordinateBuilder.add(Double.parseDouble(row[X]));
                 coordinateBuilder.add(Double.parseDouble(row[Y]));
                 coordinatesListBuilder.add(coordinateBuilder.toLogoList());
+
             }
 
         }catch (Exception ex){

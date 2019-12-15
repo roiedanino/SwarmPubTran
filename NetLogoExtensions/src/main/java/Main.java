@@ -10,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
         ReadOrigins readOrigins = new ReadOrigins();
         Argument[] arguments = new Argument[2];
+
         arguments[0] = new Argument() {
             @Override
             public Object get() throws ExtensionException, LogoException {
@@ -58,7 +59,8 @@ public class Main {
 
             @Override
             public String getString() throws ExtensionException, LogoException {
-                return "/Users/roie/Desktop/Research Assitance/Data Sets/Austin/Austin_trips_am.tntp";
+                return "/Users/roie/Desktop/Research Assistance/Data Sets/" +
+                        "TransportationNetworks-master/General-Grid/General_Grid_trips.tntp";
             }
 
             @Override
@@ -119,7 +121,7 @@ public class Main {
 
             @Override
             public int getIntValue() throws ExtensionException, LogoException {
-                return 4;
+                return 10;
             }
 
             @Override

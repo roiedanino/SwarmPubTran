@@ -46,8 +46,8 @@ end
 GRAPHICS-WINDOW
 225
 10
-633
-419
+637
+423
 -1
 -1
 4.0
@@ -61,8 +61,8 @@ GRAPHICS-WINDOW
 0
 1
 0
-99
--99
+100
+-100
 0
 1
 1
@@ -131,7 +131,7 @@ number-of-passengers
 number-of-passengers
 0
 2000
-5052.025499999994
+15844.941500000003
 10
 1
 NIL
@@ -146,7 +146,7 @@ bus-capacity
 bus-capacity
 0
 20
-8.0
+15.0
 1
 1
 NIL
@@ -248,22 +248,22 @@ number-of-buses
 number-of-buses
 1
 10
-10.0
+4.0
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-360
-467
-532
-500
+262
+438
+434
+471
 color-sensitivity
 color-sensitivity
 0
 99
-94.0
+76.0
 1
 1
 NIL
@@ -320,21 +320,21 @@ INPUTBOX
 239
 557
 nodes-file-path
-/Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master/Berlin-Friedrichshain/FixedCoords-100x100x44.95626981027546.tntp
+/Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/General-Grid/FixedCoords-100x100_circular.tntp
 1
 0
 String
 
 SLIDER
-362
-513
-535
-546
+264
+484
+437
+517
 num-of-origins
 num-of-origins
 0
 1000
-50.0
+104.0
 1
 1
 NIL
@@ -346,7 +346,7 @@ INPUTBOX
 243
 699
 trips-path
-/Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master/Berlin-Friedrichshain/friedrichshain-center_trips.tntp
+/Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/General-Grid/General_Grid_circular_trips.tntp
 1
 0
 String
@@ -357,16 +357,16 @@ INPUTBOX
 240
 629
 map-path
-/Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master/Berlin-Friedrichshain/map-100x100x44.95626981027546.png
+/Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master/General-Grid/Grid-View101x101.png
 1
 0
 String
 
 MONITOR
-983
-253
-1123
-298
+897
+71
+1037
+116
 NIL
 average-ant-lifetime
 17
@@ -374,10 +374,10 @@ average-ant-lifetime
 11
 
 PLOT
-993
-322
-1193
-472
+907
+140
+1107
+290
 average-ant-lifetime
 ticks
 lifetime
@@ -392,15 +392,59 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot count turtles"
 
 MONITOR
-987
-192
-1060
-237
+901
+10
+974
+55
 NIL
 ants-died
 17
 1
 11
+
+INPUTBOX
+901
+389
+1017
+449
+stay-away-incr
+0.01
+1
+0
+Number
+
+INPUTBOX
+899
+310
+1016
+370
+growth-deceleration
+0.001
+1
+0
+Number
+
+INPUTBOX
+1026
+389
+1128
+449
+stay-away-decay
+0.63
+1
+0
+Number
+
+INPUTBOX
+1025
+310
+1128
+370
+chipping-factor
+0.998
+1
+0
+Number
 
 @#$#@#$#@
 ## WHAT IS IT?

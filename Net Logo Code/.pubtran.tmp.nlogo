@@ -46,8 +46,8 @@ end
 GRAPHICS-WINDOW
 225
 10
-633
-419
+637
+423
 -1
 -1
 4.0
@@ -61,8 +61,8 @@ GRAPHICS-WINDOW
 0
 1
 0
-99
--99
+100
+-100
 0
 1
 1
@@ -131,7 +131,7 @@ number-of-passengers
 number-of-passengers
 0
 2000
-5052.025499999994
+10524.941500000003
 10
 1
 NIL
@@ -263,7 +263,7 @@ color-sensitivity
 color-sensitivity
 0
 99
-94.0
+75.0
 1
 1
 NIL
@@ -320,7 +320,7 @@ INPUTBOX
 239
 557
 nodes-file-path
-/Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master/Berlin-Friedrichshain/FixedCoords-100x100x44.95626981027546.tntp
+/Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master/General-Grid/FixedCoords-100x100x44.tntp
 1
 0
 String
@@ -346,7 +346,7 @@ INPUTBOX
 243
 699
 trips-path
-/Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master/Berlin-Friedrichshain/friedrichshain-center_trips.tntp
+/Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master/General-Grid/General_Grid_trips.tntp
 1
 0
 String
@@ -357,7 +357,7 @@ INPUTBOX
 240
 629
 map-path
-/Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master/Berlin-Friedrichshain/map-100x100x44.95626981027546.png
+/Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master/General-Grid/Grid-View101x101.png
 1
 0
 String
@@ -403,12 +403,12 @@ ants-died
 11
 
 INPUTBOX
-1023
-384
-1117
-444
+903
+468
+997
+528
 stay-away-incr
-0.0
+0.02
 1
 0
 Number
@@ -419,7 +419,7 @@ INPUTBOX
 1048
 370
 growth-deceleration
-0.0
+0.001
 1
 0
 Number
@@ -427,21 +427,21 @@ Number
 INPUTBOX
 899
 384
-1016
+1048
 444
 stay-away-decay
-NIL
+0.83
 1
 0
-String
+Number
 
 INPUTBOX
-1022
-310
-1117
-370
+1061
+309
+1156
+369
 chipping-factor
-0.0
+0.99
 1
 0
 Number

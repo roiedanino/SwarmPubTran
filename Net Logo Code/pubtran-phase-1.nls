@@ -84,7 +84,11 @@ to setup-passengers-from-file
         let xD item 0 dest-coordinate 
         let yD -1 * (item 1 dest-coordinate )
         set destination patch (xD) (yD)
-          
+        
+        ask destination [
+            set pcolor blue
+          ]
+          print destination
         set on-a-bus nobody
         set trip-time 0
         ]
