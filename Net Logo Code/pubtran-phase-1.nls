@@ -18,6 +18,7 @@ patches-own [
   roughness
   growth-rate
   stay-away
+  come-here
 ]
 
 ; a passenger has a destination it wishes to get to.
@@ -88,7 +89,7 @@ to setup-passengers-from-file
         ask destination [
             set pcolor blue
           ]
-          print destination
+         
         set on-a-bus nobody
         set trip-time 0
         ]
@@ -151,6 +152,7 @@ to setup-patches
     set roughness 1 / growth-deceleration
     set growth-rate 0
     set stay-away 0
+    set come-here 0
 
    ; ifelse pxcor mod 5 != 0 and pycor mod 5 != 0
     ;[ set pcolor gray ]
@@ -161,7 +163,7 @@ end
 
 to setup-patches-in-maze
 ; just rename to growth-deceleration
-  set growth-rate-change -0.001
+    set growth-deceleration 0.001
 
   ask patches [
     ; same here
@@ -201,6 +203,8 @@ end
 to go-phase-1
   grow-grass
   move-ants
+  diffuse come-here come-here-decay
+
 ;  ask ants [
 ;    ifelse age >= ant-life-span
 ;    [die]
@@ -215,9 +219,10 @@ to grow-grass
     set growth-rate growth-rate * (1 - growth-deceleration)
                             ; stay-away-decay
     set stay-away stay-away * stay-away-decay
-    refresh-color
+    
+    ;refresh-color
   ]
-
+  
   ; but not on destinations
 
   ;ask ants [
@@ -239,7 +244,6 @@ to move-ants
       set ants-died ants-died + 1
       set average-ant-lifetime (average-life + total-ticks) / ants-died
       die
-      ;set average-ant-lifetime average-life
     ]
     [next-ant-patch]
   ]
@@ -258,19 +262,20 @@ end
 to next-ant-patch
   let best-neighbor max-one-of (neighbors with [ pcolor != gray ]) [rank myself]
   if best-neighbor != nobody and [rank myself] of best-neighbor > [rank myself] of patch-here
-;  if best-neighbor != nobody and [rank myself] of best-neighbor > 0.000001 + [rank myself] of patch-here
-  [                           ; chipping-factor
+  [                           
     set roughness roughness * chipping-factor
     ; change to "set growth-rate 1 - roughness * growth-deceleration"
     set growth-rate 1 - roughness * growth-deceleration ;set growth-rate roughness * growth-rate-change + 1
     face best-neighbor
     fd 1
-  ]                         ; change to stay-away-incr
+    set come-here come-here + come-here-incr
+
+  ]                        
   set stay-away stay-away + stay-away-incr
 end
 
 to-report rank [aTurtle]
-  report 1 / ((distance [destination] of aTurtle) * roughness * (1 + stay-away) + 0.000001)
+  report (1 + come-here) / (((distance [destination] of aTurtle) ^ 2) * (1 + stay-away)  + 0.000001)
 end
 
 to-report average [numbers]

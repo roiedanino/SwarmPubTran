@@ -131,7 +131,7 @@ number-of-passengers
 number-of-passengers
 0
 2000
-15844.941500000003
+17694.9415
 10
 1
 NIL
@@ -263,7 +263,7 @@ color-sensitivity
 color-sensitivity
 0
 99
-76.0
+86.0
 1
 1
 NIL
@@ -320,7 +320,7 @@ INPUTBOX
 239
 557
 nodes-file-path
-/Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/General-Grid/FixedCoords-100x100_circular.tntp
+/Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/General-Grid/FixedCoords-100x100_lines.tntp
 1
 0
 String
@@ -346,7 +346,7 @@ INPUTBOX
 243
 699
 trips-path
-/Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/General-Grid/General_Grid_circular_trips.tntp
+/Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/General-Grid/General_Grid_lines_trips.tntp
 1
 0
 String
@@ -403,10 +403,10 @@ ants-died
 11
 
 INPUTBOX
-901
-389
-1017
-449
+445
+526
+561
+586
 stay-away-incr
 0.01
 1
@@ -414,10 +414,10 @@ stay-away-incr
 Number
 
 INPUTBOX
-899
-310
-1016
-370
+443
+447
+560
+507
 growth-deceleration
 0.001
 1
@@ -425,26 +425,48 @@ growth-deceleration
 Number
 
 INPUTBOX
-1026
-389
-1128
-449
+570
+526
+672
+586
 stay-away-decay
-0.63
+0.73
 1
 0
 Number
 
 INPUTBOX
-1025
-310
-1128
-370
+569
+447
+672
+507
 chipping-factor
 0.998
 1
 0
 Number
+
+INPUTBOX
+568
+594
+673
+654
+come-here-decay
+0.0
+1
+0
+Number
+
+INPUTBOX
+444
+593
+562
+653
+come-here-incr
+NIL
+1
+0
+String
 
 @#$#@#$#@
 ## WHAT IS IT?
