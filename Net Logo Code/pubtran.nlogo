@@ -1,30 +1,16 @@
-__includes ["pubtran-phase-1.nls" "pubtran-phase-2.nls" "pubtran-phase-3.nls"]
+__includes ["pubtran-phase-1.nls"]
 
 to reset
   reset-phase-1
 end
 
 to setup
-
-  ifelse phase = 1
-  [setup-phase-1]
-  [ifelse phase = 2
-    [setup-phase-2]
-    [ifelse phase = 3
-      [setup-phase-3]
-      [error word "No such phase " phase ]]]
-
+  setup-phase-1
   reset-ticks
 end
 
 to go
-  ifelse phase = 1
-  [go-phase-1]
-  [ifelse phase = 2
-    [go-phase-2]
-    [ifelse phase = 3
-      [go-phase-3]
-      [error word "No such phase " phase] ] ]
+  go-phase-1
 end
 
 to paint
@@ -44,9 +30,9 @@ to-report off-road-color
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-225
+253
 10
-637
+665
 423
 -1
 -1
@@ -71,10 +57,10 @@ ticks
 10.0
 
 BUTTON
-111
-304
-199
-347
+15
+204
+202
+247
 NIL
 setup
 NIL
@@ -88,10 +74,10 @@ NIL
 1
 
 BUTTON
-11
-364
-200
-398
+13
+251
+202
+285
 NIL
 go
 T
@@ -104,24 +90,6 @@ NIL
 NIL
 1
 
-PLOT
-688
-298
-888
-448
-passengers in transit
-NIL
-NIL
-0.0
-10.0
-0.0
-10.0
-true
-false
-"" "if phase != 3 [stop]"
-PENS
-"default" 1.0 0 -16777216 true "" "plot count passengers"
-
 SLIDER
 18
 163
@@ -131,52 +99,16 @@ number-of-passengers
 number-of-passengers
 0
 2000
-17694.9415
+18744.9415
 10
 1
 NIL
 HORIZONTAL
 
-SLIDER
-18
-204
-205
-237
-bus-capacity
-bus-capacity
-0
-20
-15.0
-1
-1
-NIL
-HORIZONTAL
-
-CHOOSER
-9
-304
-101
-349
-phase
-phase
-1 2 3
-0
-
 MONITOR
-686
-68
-887
-113
-bees in transit
-count bees with [ patch-here != destination ]
-17
-1
-11
-
-MONITOR
-688
+677
 10
-886
+875
 55
 ants in transit
 count ants with [ patch-here != destination ]
@@ -193,24 +125,6 @@ destination-generator
 destination-generator
 "random-location" "four-corners-location" "city-center-location" "east-location" "west-location" "north-location" "south-location"
 5
-
-PLOT
-687
-129
-887
-279
-average bus occupancy
-NIL
-NIL
-0.0
-10.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -16777216 true "" "plot sum ([occupancy] of buses) / count buses"
 
 BUTTON
 19
@@ -240,40 +154,25 @@ origin-generator
 6
 
 SLIDER
-17
-245
-205
-278
-number-of-buses
-number-of-buses
-1
-10
-4.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-262
-438
-434
-471
+269
+431
+441
+464
 color-sensitivity
 color-sensitivity
 0
 99
-86.0
+84.0
 1
 1
 NIL
 HORIZONTAL
 
 BUTTON
-153
-437
-216
-470
+135
+291
+198
+324
 NIL
 paint
 T
@@ -287,20 +186,20 @@ NIL
 1
 
 CHOOSER
-8
-430
-149
-475
+13
+291
+125
+336
 current-color
 current-color
 "road-color" "off-road-color"
 1
 
 PLOT
-687
-465
-887
-615
+674
+270
+874
+420
 ants in transit
 NIL
 NIL
@@ -315,10 +214,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot count ants"
 
 INPUTBOX
-9
-497
-239
-557
+10
+345
+240
+405
 nodes-file-path
 /Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/General-Grid/FixedCoords-100x100_lines.tntp
 1
@@ -326,10 +225,10 @@ nodes-file-path
 String
 
 SLIDER
-264
-484
-437
-517
+271
+477
+444
+510
 num-of-origins
 num-of-origins
 0
@@ -341,10 +240,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-13
-639
-243
-699
+14
+487
+244
+547
 trips-path
 /Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/General-Grid/General_Grid_lines_trips.tntp
 1
@@ -352,10 +251,10 @@ trips-path
 String
 
 INPUTBOX
-10
-569
-240
-629
+11
+417
+241
+477
 map-path
 /Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master/General-Grid/Grid-View101x101.png
 1
@@ -363,10 +262,10 @@ map-path
 String
 
 MONITOR
-897
-71
-1037
-116
+752
+64
+877
+109
 NIL
 average-ant-lifetime
 17
@@ -374,10 +273,10 @@ average-ant-lifetime
 11
 
 PLOT
-907
-140
-1107
-290
+674
+114
+874
+264
 average-ant-lifetime
 ticks
 lifetime
@@ -392,10 +291,10 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot count turtles"
 
 MONITOR
-901
-10
-974
-55
+674
+62
+747
+107
 NIL
 ants-died
 17
@@ -403,21 +302,21 @@ ants-died
 11
 
 INPUTBOX
-445
-526
-561
-586
+469
+430
+559
+490
 stay-away-incr
-0.01
+0.015
 1
 0
 Number
 
 INPUTBOX
-443
-447
-560
-507
+675
+426
+792
+486
 growth-deceleration
 0.001
 1
@@ -425,48 +324,48 @@ growth-deceleration
 Number
 
 INPUTBOX
-570
-526
-672
-586
-stay-away-decay
-0.73
-1
-0
-Number
-
-INPUTBOX
-569
-447
-672
-507
-chipping-factor
-0.998
-1
-0
-Number
-
-INPUTBOX
-568
-594
-673
-654
-come-here-decay
-0.0
-1
-0
-Number
-
-INPUTBOX
-444
-593
 562
-653
-come-here-incr
-NIL
+429
+664
+489
+stay-away-decay
+0.93
 1
 0
-String
+Number
+
+INPUTBOX
+795
+427
+884
+487
+chipping-factor
+0.995
+1
+0
+Number
+
+INPUTBOX
+563
+492
+668
+552
+come-here-decay
+0.7
+1
+0
+Number
+
+INPUTBOX
+467
+493
+560
+553
+come-here-incr
+0.0175
+1
+0
+Number
 
 @#$#@#$#@
 ## WHAT IS IT?

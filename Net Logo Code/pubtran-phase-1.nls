@@ -43,7 +43,6 @@ ants-own [
 
 to reset-phase-1
   clear-all
-  set phase 1
   setup-patches
   set file-origins-coordinates read-origins:read-regions-coordinates nodes-file-path num-of-origins
   set average-ant-lifetime 0
@@ -52,7 +51,7 @@ to reset-phase-1
 end
 
 to setup-phase-1
-  ask buses [die]
+  ;ask buses [die]
   setup-passengers-from-file ;setup-passengers
   setup-ants
   reset-ticks
@@ -104,7 +103,6 @@ to setup-passengers
   set-default-shape passengers "person business"
   create-passengers number-of-passengers [
     let origin-patch runresult origin-generator
-;    setxy ([pxcor] of origin-patch + -0.3 + random-float 0.6) ([pycor] of origin-patch + -0.3 + random-float 0.6)
     setxy ([pxcor] of origin-patch) ([pycor] of origin-patch)
     set destination runresult destination-generator
     set on-a-bus nobody
@@ -148,25 +146,17 @@ to setup-patches
   import-pcolors map-path
   
   ask patches [
-                ; 1 / growth-deceleration
     set roughness 1 / growth-deceleration
     set growth-rate 0
     set stay-away 0
     set come-here 0
-
-   ; ifelse pxcor mod 5 != 0 and pycor mod 5 != 0
-    ;[ set pcolor gray ]
-    ;[ refresh-color ]
-
   ]
 end
 
 to setup-patches-in-maze
-; just rename to growth-deceleration
     set growth-deceleration 0.001
 
   ask patches [
-    ; same here
     set roughness 1 / growth-deceleration
     set growth-rate 0
     set stay-away 0
@@ -174,7 +164,6 @@ to setup-patches-in-maze
     ifelse pcolor > 3
     [ set pcolor gray ]
     [ refresh-color ]
-
   ]
 end
 
@@ -215,12 +204,8 @@ end
 to grow-grass
   ask patches with [ pcolor != gray ] [
     set roughness roughness + growth-rate
-                                ; 1 - growth-deceleration
     set growth-rate growth-rate * (1 - growth-deceleration)
-                            ; stay-away-decay
     set stay-away stay-away * stay-away-decay
-    
-    ;refresh-color
   ]
   
   ; but not on destinations
@@ -249,7 +234,7 @@ to move-ants
   ]
 end
 
-to refresh-color                                        ; growth-deceleration
+to refresh-color                                       
   let s scale (roughness) (color-sensitivity / (100.0 * growth-deceleration))  (1 / growth-deceleration) 0 100
   set pcolor approximate-hsb 124 s s
 end
@@ -264,8 +249,7 @@ to next-ant-patch
   if best-neighbor != nobody and [rank myself] of best-neighbor > [rank myself] of patch-here
   [                           
     set roughness roughness * chipping-factor
-    ; change to "set growth-rate 1 - roughness * growth-deceleration"
-    set growth-rate 1 - roughness * growth-deceleration ;set growth-rate roughness * growth-rate-change + 1
+    set growth-rate 1 - roughness * growth-deceleration 
     face best-neighbor
     fd 1
     set come-here come-here + come-here-incr
