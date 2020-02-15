@@ -32,8 +32,8 @@ end
 GRAPHICS-WINDOW
 253
 10
-665
-423
+661
+418
 -1
 -1
 4.0
@@ -47,8 +47,8 @@ GRAPHICS-WINDOW
 0
 1
 0
-100
--100
+99
+-99
 0
 1
 1
@@ -57,10 +57,10 @@ ticks
 10.0
 
 BUTTON
-15
-204
-202
-247
+17
+56
+73
+100
 NIL
 setup
 NIL
@@ -74,10 +74,10 @@ NIL
 1
 
 BUTTON
-13
-251
-202
-285
+77
+55
+207
+100
 NIL
 go
 T
@@ -91,15 +91,15 @@ NIL
 1
 
 SLIDER
-18
-163
-205
-196
+15
+114
+202
+147
 number-of-passengers
 number-of-passengers
 0
 2000
-18744.9415
+520.0
 10
 1
 NIL
@@ -115,16 +115,6 @@ count ants with [ patch-here != destination ]
 17
 1
 11
-
-CHOOSER
-17
-113
-204
-158
-destination-generator
-destination-generator
-"random-location" "four-corners-location" "city-center-location" "east-location" "west-location" "north-location" "south-location"
-5
 
 BUTTON
 19
@@ -143,36 +133,26 @@ NIL
 NIL
 1
 
-CHOOSER
-17
-63
-204
-108
-origin-generator
-origin-generator
-"city-center-location" "four-corners-location" "random-location" "east-location" "west-location" "north-location" "south-location"
-6
-
 SLIDER
-269
-431
-441
-464
+256
+424
+428
+457
 color-sensitivity
 color-sensitivity
 0
 99
-84.0
+63.0
 1
 1
 NIL
 HORIZONTAL
 
 BUTTON
-135
-291
-198
-324
+137
+152
+200
+185
 NIL
 paint
 T
@@ -186,20 +166,20 @@ NIL
 1
 
 CHOOSER
-13
-291
-125
-336
+15
+152
+127
+197
 current-color
 current-color
 "road-color" "off-road-color"
-1
+0
 
 PLOT
-674
-270
-874
-420
+676
+117
+876
+267
 ants in transit
 NIL
 NIL
@@ -214,58 +194,58 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot count ants"
 
 INPUTBOX
-10
-345
-240
-405
+12
+206
+242
+266
 nodes-file-path
-/Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/General-Grid/FixedCoords-100x100_lines.tntp
+/Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/SiouxFalls/FixedCoords-100x100x2.1521739130434783E-4.tntp
 1
 0
 String
 
 SLIDER
-271
-477
-444
-510
+488
+424
+661
+457
 num-of-origins
 num-of-origins
 0
 1000
-104.0
+25.0
 1
 1
 NIL
 HORIZONTAL
 
 INPUTBOX
-14
-487
-244
-547
+17
+348
+247
+408
 trips-path
-/Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/General-Grid/General_Grid_lines_trips.tntp
+/Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/SiouxFalls/SiouxFalls_trips.tntp
 1
 0
 String
 
 INPUTBOX
-11
-417
-241
-477
+14
+278
+244
+338
 map-path
-/Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master/General-Grid/Grid-View101x101.png
+/Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/SiouxFalls/map-100x100x2.1521739130434783E-4.png
 1
 0
 String
 
 MONITOR
-752
-64
-877
-109
+753
+62
+878
+107
 NIL
 average-ant-lifetime
 17
@@ -273,10 +253,10 @@ average-ant-lifetime
 11
 
 PLOT
-674
-114
-874
-264
+882
+117
+1042
+237
 average-ant-lifetime
 ticks
 lifetime
@@ -302,21 +282,21 @@ ants-died
 11
 
 INPUTBOX
-469
-430
-559
-490
+674
+336
+789
+396
 stay-away-incr
-0.015
+0.2
 1
 0
 Number
 
 INPUTBOX
-675
-426
-792
-486
+677
+273
+791
+333
 growth-deceleration
 0.001
 1
@@ -324,21 +304,21 @@ growth-deceleration
 Number
 
 INPUTBOX
-562
-429
-664
-489
+793
+338
+895
+398
 stay-away-decay
-0.93
+0.99
 1
 0
 Number
 
 INPUTBOX
-795
-427
-884
-487
+794
+272
+897
+332
 chipping-factor
 0.995
 1
@@ -346,26 +326,37 @@ chipping-factor
 Number
 
 INPUTBOX
-563
-492
-668
-552
+794
+401
+896
+461
 come-here-decay
-0.7
+0.5
 1
 0
 Number
 
 INPUTBOX
-467
-493
-560
-553
+673
+399
+789
+459
 come-here-incr
-0.0175
+0.045
 1
 0
 Number
+
+SWITCH
+18
+412
+154
+446
+flip-vertical
+flip-vertical
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?

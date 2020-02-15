@@ -46,7 +46,7 @@ public class RoadsReader {
             reader = new CSVReader(new FileReader(path), '\t');
             reader.skip(HEADER_LINES);
             Iterator<String[]> linesIterator = reader.iterator();
-
+            Set<String> noDoubleRoads = new HashSet<>();
             for (int i = 0; linesIterator.hasNext() ; i++) {
                 Map<String, Double> rowContentTable = new HashMap<>();
                 String[] row = linesIterator.next();
@@ -56,7 +56,13 @@ public class RoadsReader {
                 for (int j = 0; j < keys.length; j++) {
                     rowContentTable.put(keys[j], Double.parseDouble(row[j + 1]));
                 }
-                tablesList.add(rowContentTable);
+
+                String uniqueId = toUniqueKey(rowContentTable.get(K_INIT_NODE).intValue(),
+                        rowContentTable.get(K_TERM_NODE).intValue());
+                if(!noDoubleRoads.contains(uniqueId)){
+                    noDoubleRoads.add(uniqueId);
+                    tablesList.add(rowContentTable);
+                }
             }
 
         }catch (Exception ex){
@@ -64,5 +70,25 @@ public class RoadsReader {
         }
 
         return tablesList;
+    }
+
+    private static String toUniqueKey(int initNode, int termNode){
+        return Math.min(initNode, termNode) + "," + Math.max(initNode, termNode);
+    }
+
+    public static List<Road> loadRoads(String path, List<Node> nodes){
+        List<Map<String, Double>> roadsAsMaps = readFrom(path);
+        List<Road> roads = new ArrayList<>();
+        int i = 1;
+        for (Map<String, Double> roadMap : roadsAsMaps){
+            roads.add(new Road(
+                    i++,
+                    nodes.get(roadMap.get(K_INIT_NODE).intValue() - 1),
+                    nodes.get(roadMap.get(K_TERM_NODE).intValue() - 1),
+                    roadMap.get(K_CAPACITY))
+            );
+        }
+
+        return roads;
     }
 }

@@ -60,29 +60,37 @@ end
 to setup-passengers-from-file
   set-default-shape passengers "person business"
   set flowMap read-origins:read-flow-mat trips-path num-of-origins;load-flow-map-from-file
-  
+  set number-of-passengers 0
   let i 0
   let j 0
+  
   repeat length(flowMap) [
     set j 0
-    repeat length(flowMap) + 1 [
+    
+    repeat length(flowMap) + 1 [ 
       
-      if j < length(item i flowMap) [
+      if j < length(item i flowMap)[
       let flow item j item i flowMap
-      let passengersToAdd flow / 20
-      set number-of-passengers number-of-passengers + passengersToAdd
+      let passengersToAdd flow / 500
+      set number-of-passengers number-of-passengers + floor(passengersToAdd)
       
-      create-passengers passengersToAdd 
+      create-passengers passengersToAdd
       [
         let origin-coordinate item i file-origins-coordinates
         let xO item 0 origin-coordinate 
         let yO -1 * (item 1 origin-coordinate) 
         
-        setxy xO yO
+        
         
         let dest-coordinate item j file-origins-coordinates
-        let xD item 0 dest-coordinate 
+        let xD item 0 dest-coordinate
         let yD -1 * (item 1 dest-coordinate )
+          
+          if flip-vertical[ ; coords are in [-99, 0], to flip it vertical we need to find to compliment to 100 but in negative, for example: -37 -> -(100 - 37) -> -100 + 37
+            set yO min-pycor - yO
+            set yD min-pycor - yD
+          ]
+        setxy xO yO
         set destination patch (xD) (yD)
         
         ask destination [
@@ -99,49 +107,7 @@ to setup-passengers-from-file
   ]
 end
 
-to setup-passengers
-  set-default-shape passengers "person business"
-  create-passengers number-of-passengers [
-    let origin-patch runresult origin-generator
-    setxy ([pxcor] of origin-patch) ([pycor] of origin-patch)
-    set destination runresult destination-generator
-    set on-a-bus nobody
-    set trip-time 0
-  ]
-end
-
-to-report random-location
-  report patch ( 5 * int (random world-width / 5) - (world-width - 1) / 2) (5 * int (random world-height / 5) - (world-height - 1) / 2)
-end
-
-to-report city-center-location
-  report patch 0 0
-end
-
-to-report four-corners-location
-  report item random 4 (list patch min-pxcor min-pycor patch min-pxcor max-pycor patch max-pxcor min-pxcor patch max-pxcor max-pxcor)
-end
-
-to-report east-location
-  report patch min-pxcor 0
-end
-
-to-report west-location
-  report patch max-pxcor 0
-end
-
-to-report south-location
-  ;report patch 0 min-pycor
-  report patch 1 -47
-end
-
-to-report north-location
-  ;report patch 0 max-pycor
-  report patch 10 40
-end
-
 to setup-patches
-  set growth-rate-change -0.001
   
   import-pcolors map-path
   
@@ -150,6 +116,14 @@ to setup-patches
     set growth-rate 0
     set stay-away 0
     set come-here 0
+  
+    ; fix colors
+    ifelse abs(pcolor - green) <= 1 [
+      set pcolor road-color
+    ]
+    [
+      set pcolor off-road-color
+    ]
   ]
 end
 
@@ -193,7 +167,7 @@ to go-phase-1
   grow-grass
   move-ants
   diffuse come-here come-here-decay
-
+  ask patches with [ pcolor != gray ] [refresh-color]
 ;  ask ants [
 ;    ifelse age >= ant-life-span
 ;    [die]
@@ -210,8 +184,8 @@ to grow-grass
   
   ; but not on destinations
 
-  ;ask ants [
-  ;  ask destination [ refresh-color ]
+ ; ask ants [
+  ;  ask patch-here [ refresh-color ]
   ;]
 end
 

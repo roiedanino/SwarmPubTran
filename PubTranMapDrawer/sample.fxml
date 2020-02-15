@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -47,8 +49,19 @@
                   <VBox alignment="CENTER" maxWidth="400.0" prefHeight="200.0" prefWidth="50.0" spacing="10.0" BorderPane.alignment="CENTER">
                      <children>
                         <ComboBox fx:id="cityDataCombo" prefWidth="150.0" promptText="Choose a city" />
+                        <HBox prefHeight="19.0" prefWidth="380.0" spacing="20.0">
+                           <children>
+                              <CheckBox fx:id="flipVertically" mnemonicParsing="false" text="Flip Vertically" />
+                              <CheckBox fx:id="enumerateNodes" mnemonicParsing="false" text="Enumerate Nodes" />
+                              <CheckBox fx:id="enumerateRoads" contentDisplay="CENTER" mnemonicParsing="false" text="Enumerate Roads">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </CheckBox>
+                           </children>
+                        </HBox>
+                        <CheckBox fx:id="colorBusLines" mnemonicParsing="false" text="Color Buslines" />
                         <TextField fx:id="sizeInput" promptText="Size" />
-                        <TextField fx:id="fixedInput" promptText="Fix" />
                         <Button fx:id="coordsButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#onCoordsButtonClicked" text="Load Coords" textAlignment="CENTER" />
                      </children>
                      <opaqueInsets>
