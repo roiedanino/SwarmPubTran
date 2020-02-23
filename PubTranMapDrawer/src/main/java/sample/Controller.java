@@ -136,9 +136,10 @@ public class Controller implements Initializable {
         if(enumerateNodes.isSelected())
             drawCoordsNumbers(graphics2D, nodes);
 
+        List<BusLine> busLines = RoadPopularityConverter.readBusLines(roads);
         drawRoads(graphics2D,roads);
         if(colorBusLines.isSelected())
-            drawLines(graphics2D, roads, size);
+            drawLines(graphics2D, busLines, size);
         writableImage = SwingFXUtils.toFXImage(bufferedImage, null);
         imageView.setImage(writableImage);
 
@@ -245,26 +246,23 @@ public class Controller implements Initializable {
     }
 
     private java.awt.Color randomColor(){
-        return new java.awt.Color((int)(255 * Math.random()), (int)(255 * Math.random()), (int)(255 * Math.random()));
+        return new java.awt.Color((int)(255 * Math.random()), (int)(255 * Math.random()),
+                (int)(255 * Math.random()));
     }
 
-    private void drawLines(Graphics2D graphics2D, List<Road> roads, int size){
-        try {
-            List<BusLine> busLines = RoadPopularityConverter.readBusLines(roads);
-            graphics2D.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
-            for(BusLine busLine : busLines){
-                graphics2D.setColor(randomColor());
-                graphics2D.setStroke(new BasicStroke(busLine.getFreqPerDay() / 10));
-                busLine.draw(graphics2D, size);
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    private void drawLines(Graphics2D graphics2D, List<BusLine> busLines, int size){
+        final int LINE_WIDTH = 10;
+        graphics2D.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 25));
+        int i = -6;
+        for(BusLine busLine : busLines){
+//                graphics2D.setColor(randomColor());
+            graphics2D.setStroke(new BasicStroke(LINE_WIDTH));
+            busLine.draw(graphics2D, size, i++);
         }
+
     }
 
     private void drawRoads(Graphics2D graphics2D, List<Road> roads){
-
         graphics2D.setColor(new java.awt.Color(102, 204, 80));
         graphics2D.setFont(new Font(Font.MONOSPACED, Font.PLAIN,25));
         for (Road road : roads) {

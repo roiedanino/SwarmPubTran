@@ -47,7 +47,9 @@ public class RoadPopularityConverter {
             List<Road> lineRoads = Stream.of(parts[ROADS].trim().split(" ")).map(Integer::parseInt)
                     .map(roadMap::get).map(roads::get)
                     .collect(Collectors.toList());
+            lineRoads.forEach(road -> road.addFrequency(frequency));
             lines.add(new BusLine(lineNumber, lineRoads, frequency));
+
         }
 
         scanner.close();

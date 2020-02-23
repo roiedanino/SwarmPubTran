@@ -41,7 +41,7 @@ public class BusLine {
         this.freqPerDay = freqPerDay;
     }
 
-    public void draw(Graphics2D graphics2D, int size){
+    public void draw(Graphics2D graphics2D, int size, int enumeration){
         for (Road road: roads){
             Node initPoint = road.getInitNode();
             Node termPoint = road.getTermNode();
@@ -60,12 +60,13 @@ public class BusLine {
                 yInit -= 10;
             }
 
-            graphics2D.drawString(lineNumber + "",  size - 40,
-                    20 + 20 * lineNumber);
+//            graphics2D.setStroke(new BasicStroke(road.getFrequency() / 15));
 
-            graphics2D.drawLine(xInit + lineNumber + 3, yInit + lineNumber,
-                    xFinal + lineNumber + 3,
-                    yFinal + lineNumber);
+            graphics2D.drawString(lineNumber + "",  size - 40,
+                    30 + 30 * (enumeration + 10));
+
+            graphics2D.drawLine(xInit + enumeration * 3, yInit + enumeration,
+                            xFinal + enumeration * 3, yFinal + enumeration);
 
         }
     }
