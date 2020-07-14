@@ -136,7 +136,7 @@ to setup-patches-in-maze
     set stay-away 0
 
     ifelse pcolor > 3
-    [ set pcolor gray ]
+    [ set pcolor off-road-color ]
     [ refresh-color ]
   ]
 end
@@ -167,7 +167,7 @@ to go-phase-1
   grow-grass
   move-ants
   diffuse come-here come-here-decay
-  ask patches with [ pcolor != gray ] [refresh-color]
+  ask patches with [ pcolor != off-road-color ] [refresh-color]
 ;  ask ants [
 ;    ifelse age >= ant-life-span
 ;    [die]
@@ -176,7 +176,7 @@ to go-phase-1
 end
 
 to grow-grass
-  ask patches with [ pcolor != gray ] [
+  ask patches with [ pcolor != off-road-color ] [
     set roughness roughness + growth-rate
     set growth-rate growth-rate * (1 - growth-deceleration)
     set stay-away stay-away * stay-away-decay
@@ -219,7 +219,7 @@ end
 
 
 to next-ant-patch
-  let best-neighbor max-one-of (neighbors with [ pcolor != gray ]) [rank myself]
+  let best-neighbor max-one-of (neighbors with [ pcolor != off-road-color ]) [rank myself]
   if best-neighbor != nobody and [rank myself] of best-neighbor > [rank myself] of patch-here
   [                           
     set roughness roughness * chipping-factor

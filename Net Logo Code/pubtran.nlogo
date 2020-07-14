@@ -26,14 +26,14 @@ to-report road-color
 end
 
 to-report off-road-color
-  report 5
+  report 6.9
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
 253
 10
 661
-418
+419
 -1
 -1
 4.0
@@ -142,7 +142,7 @@ color-sensitivity
 color-sensitivity
 0
 99
-63.0
+66.0
 1
 1
 NIL
@@ -351,7 +351,7 @@ SWITCH
 18
 412
 154
-446
+445
 flip-vertical
 flip-vertical
 0

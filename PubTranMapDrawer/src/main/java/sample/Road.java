@@ -68,8 +68,8 @@ public class Road {
         int yFinal = termNode.getY();
         int frequency = this.frequency > 140 ? 140: this.frequency;
         Color roadColor = new Color(ROAD_COLOR.getRed() / 256f, ROAD_COLOR.getGreen() / 256f ,
-                ROAD_COLOR.getBlue() / 256f,
-                1f - frequency / 140f);
+                ROAD_COLOR.getBlue() / 256f);
+//                1f - frequency / 140f);
         System.out.println("Freq: " + frequency);
         graphics2D.setColor(Color.BLACK);
         graphics2D.drawLine(xInit, yInit, xFinal, yFinal);

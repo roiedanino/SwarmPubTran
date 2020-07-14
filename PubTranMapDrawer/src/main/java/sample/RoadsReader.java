@@ -1,6 +1,7 @@
 package sample;
 
 import com.opencsv.CSVReader;
+import jdk.internal.util.xml.impl.ReaderUTF8;
 
 import java.io.FileReader;
 import java.util.*;
@@ -42,10 +43,10 @@ public class RoadsReader {
         CSVReader reader = null;
         List<Map<String, Double>> tablesList = new ArrayList<>();
         try {
-
             reader = new CSVReader(new FileReader(path), '\t');
             reader.skip(HEADER_LINES);
             Iterator<String[]> linesIterator = reader.iterator();
+
             Set<String> noDoubleRoads = new HashSet<>();
             for (int i = 0; linesIterator.hasNext() ; i++) {
                 Map<String, Double> rowContentTable = new HashMap<>();
