@@ -59,8 +59,7 @@ public class Main {
 
             @Override
             public String getString() throws ExtensionException, LogoException {
-                return "/Users/roie/Desktop/Research Assistance/Data Sets/" +
-                        "TransportationNetworks-master/General-Grid/General_Grid_trips.tntp";
+                return "../Data Sets/TransportationNetworks-master/General-Grid/General_Grid_trips.tntp";
             }
 
             @Override
