@@ -8,12 +8,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class RoadPopularityConverter {
-    static final String ROADS_POPULARITY_PATH = "/Users/roie/Desktop/Research Assistance/GitRepos/" +
-            "Applying-Swarm-Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/" +
-            "SiouxFalls/roads_popularity.txt";
-    static final String MAPPING_ROADS_PATH = "/Users/roie/Desktop/Research Assistance/GitRepos/Applying-Swarm-" +
-            "Intelligence-For-Public-Transportation/Data Sets/TransportationNetworks-master/" +
-            "SiouxFalls/map_roads_numbers.txt";
+    static final String ROADS_POPULARITY_PATH = "../Data Sets/TransportationNetworks-master/SiouxFalls/roads_popularity.txt";
+    static final String MAPPING_ROADS_PATH = "../Data Sets/TransportationNetworks-master/SiouxFalls/map_roads_numbers.txt";
 
     private static Map<Integer, Integer> readRoadMapping() throws FileNotFoundException {
         Map<Integer,Integer> map = new HashMap<>();
