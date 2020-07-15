@@ -29,7 +29,7 @@ public class Controller implements Initializable {
     private final static Color ROAD_COLOR = Color.rgb(102, 204, 80);
     private final static Color OFF_ROAD_COLOR = Color.rgb(184, 184, 184);
 
-    private final static String PATH_TO_DATASET = "/Users/roie/Desktop/Research Assistance/Data Sets/TransportationNetworks-master";
+    private final static String PATH_TO_DATASET = "../Data Sets/TransportationNetworks-master";
 
 
     @FXML
