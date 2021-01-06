@@ -13,7 +13,7 @@ Ideally, for our research needs, each city folder contains the following files:
 
 
 # The NetLogo Model
-![Screenshot/NetLogoModel.png](https://github.com/roiedanino/SwarmPubTran/blob/master/Screenshots/Net%20Logo%20Model.png | max-width:60%;)
+![Screenshot/NetLogoModel.png](https://github.com/roiedanino/SwarmPubTran/blob/master/Screenshots/Net%20Logo%20Model.png)
 ## Installation Steps: 
 1. [Download](https://ccl.northwestern.edu/netlogo/6.1.0/) and install Net Logo 6.1.0
 2. [Download this repo as zip](https://github.com/roiedanino/SwarmPubTran/archive/master.zip) or clone using: `git clone https://github.com/roiedanino/SwarmPubTran.git`
