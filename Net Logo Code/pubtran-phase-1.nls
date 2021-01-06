@@ -12,6 +12,7 @@ globals [
   flowMap
   average-ant-lifetime
   ants-died
+  num-of-origins
 ]
 
 patches-own [

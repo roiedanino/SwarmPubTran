@@ -24,6 +24,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.List;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Controller implements Initializable {
     private final static Color ROAD_COLOR = Color.rgb(102, 204, 80);
@@ -63,7 +64,9 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        cityDataCombo.setItems(FXCollections.observableArrayList(new File(PATH_TO_DATASET).listFiles()));
+        cityDataCombo.setItems(FXCollections.observableArrayList(Arrays.stream(
+                new File(PATH_TO_DATASET).listFiles()).filter(File::isDirectory)
+                .filter(file -> !file.isHidden()).collect(Collectors.toList())));
         cityDataCombo.setConverter(new StringConverter<File>() {
             @Override
             public String toString(File file) {
