@@ -60,10 +60,13 @@ Research Parameter | Description | Example Value
 ![Map Drawer Screenshot](https://github.com/roiedanino/SwarmPubTran/blob/master/Screenshots/MapDrawerScale.png)
 Map Drawer is a Java application for converting origin/destination and road files in TNTP format to a png image with patch colors suitable for reading by the NetLogo environment.
 The application would list the available cities from the data-set of your choosing, you may also choose the result image size, while 100 works seems to work the best, the graph would scale automatically as big as it can fit. The application also creates a new fixed coordinates file which fits the scaled graph and suite the NetLogo coordinate system.
+
+- After clicking on the `Load Coords` button, the image file is saved into the selected dataset-city folder along with the "fixed" coordinates (node.tntp), the new fixed coordinates adjusted to the entered image size. 
+
 ### Checkboxes
 Check Box | Maps it works with
 --- | --- |
 Flip Vertically | SiouxFalls, Berlin Maps, Chicago Maps
 Enumerate Nodes | SiouxFalls, Berlin Maps, Chicago Maps
 Enumerate Roads | SiouxFalls, Berlin Maps, Chicago Maps
-Color Buslines | SiouxFalls - Required data taken from Movit's website
+Color Buslines | SiouxFalls - Required data was taken from Moovit's website
