@@ -45,7 +45,20 @@ while considering the `number-of-passengers` as the total amount of passengers
 `stay-away-incr` -
 `stay-away-decay` -
 `come-here-incr` -
-`come-here-decay`
+`come-here-decay` -
+
+`growth-decelration` | #1 
+--- | --- 
+`chipping-factor` | 301 
+--- | --- 
+`stay-away-incr` | 301 
+--- | --- 
+`stay-away-decay` | 301 
+--- | --- 
+`come-here-incr` | 301 
+--- | --- 
+`come-here-decay` | 301 
+
 
 # The Map Drawer
   
