@@ -39,25 +39,21 @@ while considering the `number-of-passengers` as the total amount of passengers
 
 #### Other parameters
 `color-sensitivity` -- changes the intensity of the pheromones, so it will be easier to adjust it as needed while the model is running. 
-##### Research Parameters
-`growth-decelration` -
-`chipping-factor` - 
-`stay-away-incr` -
-`stay-away-decay` -
-`come-here-incr` -
-`come-here-decay` -
 
-`growth-decelration` | #1 
---- | --- 
-`chipping-factor` | 301 
---- | --- 
-`stay-away-incr` | 301 
---- | --- 
-`stay-away-decay` | 301 
---- | --- 
-`come-here-incr` | 301 
---- | --- 
-`come-here-decay` | 301 
+#### Research Parameters
+Parameters related to determining the "Natural Conditions" for the model, in general the model moves ants from different origin pixels to their destination pixels,
+anywhere an ant passes its "eating" some of the grass in that pixel, making that pixel a little bit darker, while diffusing 2 kinds of pheromones:
+1. 'stay-away' - tells the other ants to stay away and prevent collisions
+2. 'come-here' - tells the other ants to come near
+
+Research Parameter | Description | Example Value
+--- | --- | --- |
+`growth-decelration` | Determines how slow the grass grows back after being "eaten" by an ant | 0.001
+`chipping-factor` |  The precentage of the grass left after an ant passes over it | 0.995
+`stay-away-incr` | Determines the addition factor of the stay-away pheromone | 0.2
+`stay-away-decay` | Determines the multiplication factor of the stay-away pheromone | 0.99
+`come-here-incr` | Determines the addition factor of the come-here pheromone | 0.045
+`come-here-decay` | Determines the multiplication factor of the come-here pheromone | 0.5
 
 
 # The Map Drawer
