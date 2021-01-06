@@ -1,4 +1,4 @@
-# SwarmPubTran
+# Applying Swarm intelligence to demand Responsive Transportation Services
 A Research - Applying swarm intelligence for public transportation, NetLogo model and additional proprietary tools such as map drawer and NetLogo extension for parsing input files.
 
 # Dataset
