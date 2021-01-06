@@ -13,7 +13,7 @@ Ideally, for our research needs, each city folder contains the following files:
 
 
 # The NetLogo Model
-![Screenshot/NetLogoModel.png](https://github.com/roiedanino/SwarmPubTran/blob/master/Screenshots/Net%20Logo%20Model.png =250x250)
+![Screenshot/NetLogoModel.png](https://github.com/roiedanino/SwarmPubTran/blob/master/Screenshots/Net%20Logo%20Model.png=250x250)
 ## Installation Steps: 
 1. [Download](https://ccl.northwestern.edu/netlogo/6.1.0/) and install Net Logo 6.1.0
 2. [Download this repo as zip](https://github.com/roiedanino/SwarmPubTran/archive/master.zip) or clone using: `git clone https://github.com/roiedanino/SwarmPubTran.git`
@@ -57,7 +57,7 @@ Research Parameter | Description | Example Value
 
 
 # The Map Drawer
-![Map Drawer Screenshot](https://github.com/roiedanino/SwarmPubTran/blob/master/Screenshots/MapDrawerScale.png =250x250)
+![Map Drawer Screenshot](https://github.com/roiedanino/SwarmPubTran/blob/master/Screenshots/MapDrawerScale.png | width=100)
 Map Drawer is a Java application for converting origin/destination and road files in TNTP format to a png image with patch colors suitable for reading by the NetLogo environment.
 The application would list the available cities from the data-set of your choosing, you may also choose the result image size, while 100 works seems to work the best, the graph would scale automatically as big as it can fit. The application also creates a new fixed coordinates file which fits the scaled graph and suite the NetLogo coordinate system.
 
