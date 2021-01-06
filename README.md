@@ -44,7 +44,7 @@ while considering the `number-of-passengers` as the total amount of passengers
 Parameters related to determining the "Natural Conditions" for the model, in general the model moves ants from different origin pixels to their destination pixels,
 anywhere an ant passes its "eating" some of the grass in that pixel, making that pixel a little bit darker, while diffusing 2 kinds of pheromones:
 1. 'stay-away' - tells the other ants to stay away and prevent collisions
-2. 'come-here' - tells the other ants to come near
+2. 'come-here' - tells the other ants to come near, just like real ants attraction pheromones
 
 Research Parameter | Description | Example Value
 --- | --- | --- |
@@ -57,4 +57,7 @@ Research Parameter | Description | Example Value
 
 
 # The Map Drawer
-  
+![Map Drawer Screenshot](https://github.com/roiedanino/SwarmPubTran/blob/master/Screenshots/MapDrawerScale.png)
+Map Drawer is a Java application for converting origin/destination and road files in TNTP format to a png image with patch colors suitable for reading by the NetLogo environment.
+The application would list the available cities from the data-set of your choosing, you may also choose the result image size, while 100 works seems to work the best, the graph would scale automatically as big as it can fit. The application also creates a new fixed coordinates file which fits the scaled graph and suite the NetLogo coordinate system.
+
